@@ -1,0 +1,50 @@
+=== LANGUAGE IDENTIFICATION MODEL EVALUATION ===
+
+=== SUMMARY METRICS ===
+Overall Accuracy: 0.9823
+Balanced Accuracy: 0.9823
+Macro F1: 0.9823
+Weighted F1: 0.9823
+Top-3 Accuracy: 0.9994
+Top-5 Accuracy: 0.9997
+Average ROC AUC: 0.9997
+
+=== PER-CLASS METRICS ===
+                  precision   recall  f1-score       support
+Mandarin Chinese   0.994823  0.99920  0.997007    5000.00000
+Spanish            1.000000  1.00000  1.000000    5000.00000
+English            0.916873  0.88680  0.901586    5000.00000
+Hindi              0.991426  0.99440  0.992911    5000.00000
+Arabic             0.994579  0.99080  0.992686    5000.00000
+Bengali            0.990227  0.99300  0.991612    5000.00000
+Portuguese         0.991479  0.97740  0.984389    5000.00000
+Russian            0.997773  0.98560  0.991649    5000.00000
+Japanese           1.000000  1.00000  1.000000    5000.00000
+Western Punjabi    0.978480  0.99120  0.984799    5000.00000
+Marathi            0.987982  0.95360  0.970486    5000.00000
+Telugu             0.980907  0.98640  0.983646    5000.00000
+Wu Chinese         0.999600  0.99960  0.999600    5000.00000
+Turkish            0.989707  0.98080  0.985234    5000.00000
+Korean             1.000000  0.99980  0.999900    5000.00000
+French             1.000000  0.99960  0.999800    5000.00000
+German             0.993212  0.99500  0.994105    5000.00000
+Vietnamese         0.957645  0.98580  0.971519    5000.00000
+Tamil              0.998599  0.99760  0.998099    5000.00000
+Urdu               0.886684  0.92960  0.907635    5000.00000
+accuracy           0.982310  0.98231  0.982310       0.98231
+macro avg          0.982500  0.98231  0.982333  100000.00000
+weighted avg       0.982500  0.98231  0.982333  100000.00000
+
+=== CONFUSION ANALYSIS ===
+
+Most Frequent Confusions:
+English → Urdu: 557 misclassifications
+Urdu → English: 347 misclassifications
+Marathi → Vietnamese: 218 misclassifications
+Portuguese → Western Punjabi: 109 misclassifications
+Turkish → Telugu: 73 misclassifications
+Vietnamese → Marathi: 58 misclassifications
+Western Punjabi → Portuguese: 42 misclassifications
+Russian → English: 38 misclassifications
+Russian → Urdu: 34 misclassifications
+Telugu → Turkish: 31 misclassifications
