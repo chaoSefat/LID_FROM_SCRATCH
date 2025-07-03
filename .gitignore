@@ -1,2 +1,5 @@
 .env
 data_curation/glotlid_top20/
+.DS_Store
+data_curation/.DS_Store
+data_curation/.DS_Store
