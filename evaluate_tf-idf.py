@@ -1,10 +1,3 @@
-#!/usr/bin/env python3
-"""
-Comprehensive Evaluation Script for Language Identification Model
-- TF-IDF (1-5 ngrams) + Logistic Regression (SGD)
-- Enhanced metrics, visualizations, and interpretability features
-"""
-
 import os
 import joblib
 import pandas as pd
@@ -28,7 +21,6 @@ MODEL_DIR = "models/"  # Directory containing saved models
 SAVE_FIGS_DIR = "figures/"  # Directory to save evaluation visualizations
 REPORT_DIR = "reports/"  # Directory for text reports
 
-# Language mapping with additional metadata for visualization
 LANGUAGE_METADATA = {
     "Mandarin Chinese": {"code": "cmn_Hani", "family": "Sino-Tibetan", "script": "Han"},
     "Spanish": {"code": "spa_Latn", "family": "Indo-European", "script": "Latin"},
@@ -52,13 +44,13 @@ LANGUAGE_METADATA = {
     "Urdu": {"code": "urd_Arab", "family": "Indo-European", "script": "Arabic"}
 }
 
-# Derived mappings
+# mappings
 language_codes = {lang: meta["code"] for lang, meta in LANGUAGE_METADATA.items()}
 label_to_lang = {v: k for k, v in language_codes.items()}
 label_list = list(language_codes.values())
 lang_names = list(LANGUAGE_METADATA.keys())
 
-# Visualization settings
+#
 sns.set_style("whitegrid")
 plt.rcParams['figure.dpi'] = 300
 plt.rcParams['savefig.bbox'] = 'tight'
@@ -273,7 +265,7 @@ def plot_confusion_matrix(y_true, y_pred, labels, label_names, filename):
 
 def plot_metric_by_family(metrics_df, metric_name, filename):
     """Visualize performance metrics grouped by language family"""
-    plt.figure(figsize=(12, 6))
+    plt.figure(figsize=(12, 12))
     
     # Prepare data
     plot_df = metrics_df.copy()
