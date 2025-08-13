@@ -44,7 +44,7 @@ The model supports 20 languages spanning 8 language families and 10 writing syst
 
 ## 📊 Performance Highlights
 
-### **For figures and detailed report please view the PDF report.**
+### **For figures and detailed report please view the [PDF report](https://github.com/chaoSefat/LID_FROM_SCRATCH/blob/main/LID_from_scratch.pdf).**
 
 ### Overall Metrics
 - **Overall Accuracy**: 98.23%
