@@ -69,11 +69,11 @@ The model supports 20 languages spanning 8 language families and 10 writing syst
 language-identification/
 ├── data_curation/
 │   └── glotlid_top20/
-│       └── outputs/           # Validation data files
+│       └── outputs/           # Validation data files (*.csv)
 ├── models/                    # Trained model artifacts
-│   ├── tfidf_vectorizer.pkl
-│   ├── logreg_model.pkl
-│   └── label_encoder.pkl
+│   ├── tfidf_vectorizer.pkl   # TF-IDF feature extractor
+│   ├── logreg_model.pkl       # Logistic regression classifier
+│   └── label_encoder.pkl      # Language label encoder
 ├── figures/                   # Generated evaluation plots
 │   ├── class_distribution.png
 │   ├── confusion_matrix_normalized.png
@@ -82,9 +82,12 @@ language-identification/
 │   └── top_k_heatmap.png
 ├── reports/                   # Detailed evaluation reports
 │   └── detailed_report.txt
-├── evaluate_tfidf.py         # Main evaluation script
+├── train_tfidf.py            # Model training script
+├── evaluate_tfidf.py         # Comprehensive evaluation script
+├── inference_tfidf.py        # Inference and interactive tool
 └── README.md
 ```
+
 
 ## 🛠️ Installation and Setup
 
@@ -103,33 +106,88 @@ The model uses the GlotLID corpus with:
 
 ## 📈 Usage
 
-### Running Evaluation
+### 1. Training the Model
 
-Execute the comprehensive evaluation script:
+Train a new model from scratch using your dataset:
+
+```bash
+python train_tfidf.py
+```
+
+This will:
+- Load training data from the GlotLID corpus
+- Create TF-IDF features using character n-grams (1-5 characters)
+- Train a logistic regression classifier with SGD
+- Save trained models to the `models/` directory
+
+**Key Training Parameters:**
+- **N-gram Range**: Character-level 1-5 grams
+- **Max Features**: Optimized for memory and performance
+- **Classifier**: Logistic Regression with SGD optimization
+- **Data Shuffling**: Random seed 42 for reproducibility
+
+### 2. Model Evaluation
+
+Run comprehensive evaluation with detailed metrics and visualizations:
 
 ```bash
 python evaluate_tfidf.py
 ```
 
-This will:
-1. Load validation data from the GlotLID corpus
-2. Load pre-trained models (TF-IDF vectorizer, logistic regression classifier, label encoder)
-3. Generate predictions and calculate comprehensive metrics
-4. Create detailed visualizations and reports
+This generates:
+- Classification metrics (accuracy, precision, recall, F1-score)
+- Confusion matrix analysis with linguistic interpretations
+- Performance breakdown by language family and script
+- Calibration curves for confidence assessment
+- Top-k accuracy analysis
+- Detailed reports and visualizations
 
-### Model Architecture
+### 3. Inference and Prediction
 
-The system uses a two-stage pipeline:
+The inference script provides multiple ways to use the trained model:
 
-1. **TF-IDF Vectorization**:
-   - Character n-grams (1-5 characters)
-   - Captures both character-level and subword patterns
-   - Effective for different scripts and languages
+#### Interactive Mode
+```bash
+python inference_tfidf.py
+```
+Enter text samples interactively and get real-time language predictions.
 
-2. **Logistic Regression Classification**:
-   - Stochastic Gradient Descent (SGD) optimization
-   - Probabilistic outputs for confidence estimation
-   - Multi-class classification with one-vs-rest approach
+#### Single Text Prediction
+```bash
+python inference_tfidf.py --text "Hello, how are you doing today?"
+```
+
+#### File Processing
+```bash
+python inference_tfidf.py --file input.txt
+```
+
+#### Custom Top-K Predictions
+```bash
+python inference_tfidf.py --text "Bonjour tout le monde" --top-k 3
+```
+
+#### Example Output
+```
+Text Sample: Bonjour tout le monde, comment allez-vous?
+
+🎯 Primary Prediction: French (99.8% confidence)
+
+📊 Top-3 Predictions:
+1. French      99.8% ████████████████████
+2. Portuguese   0.1% ▌
+3. Spanish      0.1% ▌
+```
+
+### Command Line Options
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `-t, --text` | Text to identify (if not provided, enters interactive mode) | None |
+| `-k, --top-k` | Number of top predictions to show | 3 |
+| `-f, --file` | File containing text to identify | None |
+
+
 
 ## 📊 Evaluation Framework
 
